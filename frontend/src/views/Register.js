@@ -22,7 +22,7 @@ function Register() {
     const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
     axios
-      .post(`${apiBaseUrl}/api/register.php`, formData)
+      .post(`${apiBaseUrl}/api/register`, formData)
       .then((response) => {
         if (response.data.success) {
           navigate('/');

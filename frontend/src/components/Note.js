@@ -20,7 +20,7 @@ function Login() {
     const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
     axios
-      .post(`${apiBaseUrl}/api/login.php`, formData, { withCredentials: true })
+      .post(`${apiBaseUrl}/api/login`, formData, { withCredentials: true })
       .then((response) => {
         if (response.data.success) {
           localStorage.setItem('isAuthenticated', 'true');
