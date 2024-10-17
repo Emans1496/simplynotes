@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+.container {
+  margin: auto;
+}
+
+.login-container, .register-container {
+  background-color: #220b57;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px #0003;
+  color: #220b57;
+  padding: 10px;
+  padding: 40px;
+  max-height: 1080px;
+  height: 1080px;
+}
+
+.login-container img, .register-container img {
+  display: block;
+  margin: 0 auto 20px;
+  width: 250px;
+}
+
+.form-container {
+  background-color: #fff;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.form-label {
+  color: #220B57;
+  font-weight: 700;
+}
+
+.form-labell {
+  color: white;
+  font-weight: 700;
+}
+
+.form-control{
+  margin: 10px;
+}
+
+.btnLogin{
+  margin: 10px;
+  border-radius: 20px;
+}
+
+.btn-primary {
+  background-color: #F47C00;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #e86a00;
+}
+
+.dashboard-container {
+  background-color: #220b57;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px #0000001a;
+  height: 1080px;
+  color: white;
+  text-align: center;
+}
+
+.dashboard-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  background-color: #f47c00;
+  text-align: center;
+}
+
+.btnLogout{
+  background-color: #220b57;
+  color: #fff;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 15px;
+  text-transform: uppercase;
+}
+
+.dashboard-header img {
+  height: 40px;
+}
+
+.card {
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px #0000001a;
+  text-align: center;
+  transition: transform .2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 200px 20px 200px;
+  padding: 20px;
+}
+
+.card-body{
+  color: black;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.btn-secondary {
+  background-color: #220B57;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #1a0845;
+}
+
+/* Responsività */
+@media (max-width: 600px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
