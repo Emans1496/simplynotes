@@ -21,7 +21,7 @@ FROM base as build
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copia solo composer.json e composer.lock per ottimizzare la cache di build
-COPY api/composer.json api/composer.lock /var/www/html/
+COPY composer.json composer.lock /var/www/html/
 
 # Installa le dipendenze di Composer
 WORKDIR /var/www/html
@@ -40,7 +40,7 @@ COPY .env /var/www/html/.env
 COPY --from=build /var/www/html /var/www/html
 
 # Copia tutto il resto (codice applicativo)
-COPY api /var/www/html
+COPY . /var/www/html
 
 # Imposta la directory di lavoro
 WORKDIR /var/www/html
