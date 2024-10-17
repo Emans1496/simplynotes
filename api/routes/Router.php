@@ -6,6 +6,8 @@ require_once '../controllers/UserController.php';
 class Router {
     public function direct($uri, $method) {
         $cleanUri = strtok($uri, '?');
+        $parsedUri = parse_url($uri, PHP_URL_PATH);
+
 
         switch ($cleanUri) {
             case '/api/add_note':
@@ -31,6 +33,7 @@ class Router {
             case '/api/register':
                 if ($method == 'POST') {
                     (new UserController())->register();
+                    error_log("Richiesta URI: " . $_SERVER['REQUEST_URI']);
                 }
                 break;
             case '/api/login':
