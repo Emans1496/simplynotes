@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import './App.css';
+import '../App.css';
 import { Helmet } from "react-helmet";
 
 const baseURL = process.env.REACT_APP_API_BASE_URL;
