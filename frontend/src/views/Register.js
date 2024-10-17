@@ -18,8 +18,11 @@ function Register() {
     formData.append('email', email);
     formData.append('password', password);
 
+    // Usa la variabile d'ambiente qui
+    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+
     axios
-      .post('https://simplynotes-backend.onrender.com/api/register.php', formData)
+      .post(`${apiBaseUrl}/api/register.php`, formData)
       .then((response) => {
         if (response.data.success) {
           navigate('/');
