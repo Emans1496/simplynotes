@@ -9,6 +9,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();

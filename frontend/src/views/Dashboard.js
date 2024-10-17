@@ -14,6 +14,8 @@ function Dashboard() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+
 
   const refreshNotes = () => {
     setLoading(true);

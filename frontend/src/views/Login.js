@@ -11,6 +11,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
