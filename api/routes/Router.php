@@ -5,7 +5,9 @@ require_once '../controllers/UserController.php';
 
 class Router {
     public function direct($uri, $method) {
-        switch ($uri) {
+        $cleanUri = strtok($uri, '?');
+
+        switch ($cleanUri) {
             case '/api/add_note':
                 if ($method == 'POST') {
                     (new NoteController())->addNote();
@@ -48,4 +50,5 @@ class Router {
         }
     }
 }
+
 ?>
