@@ -21,7 +21,7 @@ FROM base as build
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copia solo composer.json e composer.lock per ottimizzare la cache di build
-COPY ../composer.json ../composer.lock /var/www/html/
+COPY api/composer.json api/composer.lock /var/www/html/
 
 # Installa le dipendenze di Composer
 WORKDIR /var/www/html
@@ -31,16 +31,16 @@ RUN composer install --no-dev --optimize-autoloader
 FROM base
 
 # Copia la configurazione Nginx
-COPY ../nginx/default.conf /etc/nginx/conf.d/default.template
+COPY nginx/default.conf /etc/nginx/conf.d/default.template
 
 # Copia il file .env
-COPY ../.env /var/www/html/.env
+COPY .env /var/www/html/.env
 
 # Copia i file della tua applicazione dalla fase di build
 COPY --from=build /var/www/html /var/www/html
 
 # Copia tutto il resto (codice applicativo)
-COPY . /var/www/html
+COPY api /var/www/html
 
 # Imposta la directory di lavoro
 WORKDIR /var/www/html
