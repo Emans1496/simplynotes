@@ -4,7 +4,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import Dashboard from "./views/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import "../src/components/App.css";
+import "./App.css";
 import { Helmet } from "react-helmet";
 
 function App() {
