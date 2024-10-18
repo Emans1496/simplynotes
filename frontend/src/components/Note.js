@@ -1,77 +1,93 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
-import './App.css';
 
-function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+function Note({ note, refreshNotes }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [title, setTitle] = useState(note.title);
+  const [content, setContent] = useState(note.content);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleDelete = () => {
     const formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
+    formData.append('id', note.id);
 
-    const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-
-    axios
-      .post(`${apiBaseUrl}/api/login`, formData, { withCredentials: true })
-      .then((response) => {
-        if (response.data.success) {
-          localStorage.setItem('isAuthenticated', 'true');
-          localStorage.setItem('userId', response.data.user_id);
-          navigate('/dashboard');
-        } else {
-          setMessage(response.data.message);
-        }
+    axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/delete_note`, formData, { withCredentials: true })
+      .then(() => {
+        refreshNotes();
       })
       .catch((error) => {
         console.error('Errore:', error);
-        setMessage('Si è verificato un errore durante il login.');
+      });
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('id', note.id);
+    formData.append('title', title);
+    formData.append('content', content);
+
+    axios
+      .post('http://localhost/notesapp/api/update_note.php', formData, { withCredentials: true })
+      .then(() => {
+        setIsEditing(false);
+        refreshNotes();
+      })
+      .catch((error) => {
+        console.error('Errore:', error);
       });
   };
 
   return (
-    <div className="container login-container">
-      <img src="/1.png" alt="Login Banner" />
-      <div className="form-container">
-        <h2 className="text-center">Login</h2>
-        {message && <div className="alert alert-danger">{message}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label">Username</label>
-            <input
-              type="text"
-              className="form-control"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+    <div className="col-md-4">
+      <div className="card mb-4">
+        {isEditing ? (
+          <form onSubmit={handleUpdate} className="card-body">
+            <div className="mb-3">
+              <label className="form-label">Titolo</label>
+              <input
+                type="text"
+                className="form-control"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Contenuto</label>
+              <textarea
+                className="form-control"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary me-2">
+              Aggiorna
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => setIsEditing(false)}
+            >
+              Annulla
+            </button>
+          </form>
+        ) : (
+          <div className="card-body">
+            <h5 className="card-title">{note.title}</h5>
+            <p className="card-text">{note.content}</p>
+            <button className="btn btn-warning me-2" onClick={() => setIsEditing(true)}>
+              Modifica
+            </button>
+            <button className="btn btn-danger" onClick={handleDelete}>
+              Elimina
+            </button>
           </div>
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary w-100 btnLogin">
-            Accedi
-          </button>
-        </form>
-        <p className="mt-3 text-center">
-          Non hai un account? <Link to="/register">Registrati qui</Link>
-        </p>
+        )}
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Note;
