@@ -45,8 +45,7 @@ COPY . /var/www/html
 # Imposta la directory di lavoro
 WORKDIR /var/www/html
 
-# Espone la porta (Render.com utilizza la variabile $PORT)
-EXPOSE 10000
+EXPOSE 9000
 
 # Avvia Nginx e PHP-FPM
 CMD ["sh", "-c", "envsubst '$PORT' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && php-fpm -D && nginx -g 'daemon off;'"]
