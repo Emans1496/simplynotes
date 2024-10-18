@@ -1,10 +1,12 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://simplynotess2i.netlify.app");
+header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
-require_once '../utils/JwtHandler.php';
-require_once '../config/db.php';
+
+require_once __DIR__ . '/../utils/JwtHandler.php';
+require_once __DIR__ . '../config/db.php';
 
 class NoteController {
     private $conn;

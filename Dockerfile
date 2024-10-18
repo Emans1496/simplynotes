@@ -1,6 +1,9 @@
 # Base image
 FROM php:8.1-fpm
 
+ARG PORT=8080
+ENV PORT=${PORT}
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     nginx \
