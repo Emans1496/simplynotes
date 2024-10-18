@@ -14,6 +14,7 @@ function App() {
         <Helmet>
           <title>Simply Notes - Gestisci le tue Note</title>
           <meta name="description" content="Simply Notes ti permette di creare e gestire note in modo semplice e sicuro." />
+          <link rel="icon" type="favicon" href="%PUBLI_URL%/favicon.png" />
         </Helmet>
         <Routes>
           <Route path="/" element={<Login />} />
