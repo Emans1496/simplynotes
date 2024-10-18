@@ -6,15 +6,22 @@ ENV PORT=${PORT}
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    nginx \
-    libpq-dev \
+    # Install Nginx
+    nginx \  
+    # Librerie PostgreSQL
+    libpq-dev \  
     procps \
     nano \
     git \
     unzip \
-    gettext-base \ 
+    # Questo installa envsubst
+    gettext-base \  
+    supervisor \
     && docker-php-ext-install pdo_pgsql \
     && rm -rf /var/lib/apt/lists/*
+
+# Configure PHP-FPM to listen on 127.0.0.1:9000
+RUN sed -i 's/listen = .*/listen = 127.0.0.1:9000/' /usr/local/etc/php-fpm.d/www.conf
 
 # Copy configuration files
 COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
