@@ -12,8 +12,7 @@ RUN apt-get update && apt-get install -y \
     nano \
     git \
     unzip \
-    gettext-base \  # Questo installa envsubst
-    supervisor \
+    gettext-base \ 
     && docker-php-ext-install pdo_pgsql \
     && rm -rf /var/lib/apt/lists/*
 
