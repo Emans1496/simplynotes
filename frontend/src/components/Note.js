@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+
 
 function Note({ note, refreshNotes }) {
   const [isEditing, setIsEditing] = useState(false);

@@ -3,6 +3,11 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../App.css';
 import { Helmet } from "react-helmet";
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+
 
 const baseURL = process.env.REACT_APP_API_BASE_URL;
 
