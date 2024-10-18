@@ -12,11 +12,13 @@ RUN apt-get update && apt-get install -y \
     nano \
     git \
     unzip \
+    supervisor \
     && docker-php-ext-install pdo_pgsql \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy configuration files
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy application files
 COPY . /var/www/html
@@ -24,10 +26,10 @@ COPY . /var/www/html
 # Set working directory
 WORKDIR /var/www/html
 
-# Install Composer (se necessario)
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install PHP dependencies (se usi Composer)
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
 # Set permissions
@@ -35,7 +37,7 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
 # Expose port
-EXPOSE 8080
+EXPOSE ${PORT}
 
-# Start PHP-FPM and Nginx
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+# Start Supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
