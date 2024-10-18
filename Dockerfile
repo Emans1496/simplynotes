@@ -12,12 +12,13 @@ RUN apt-get update && apt-get install -y \
     nano \
     git \
     unzip \
+    gettext-base \  # Questo installa envsubst
     supervisor \
     && docker-php-ext-install pdo_pgsql \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy configuration files
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copy application files
