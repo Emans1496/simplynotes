@@ -1,11 +1,11 @@
 <?php
-header("Access-Control-Allow-Origin: https://simplynotess2i.netlify.app");
+// CORS aggiornato
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
-
-require  '../vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
