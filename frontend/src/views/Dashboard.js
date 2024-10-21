@@ -4,10 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Note from "../components/Note";
 import Loader from "../components/Loader";
 import "../App.css";
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Credentials: true");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 
 const baseURL = process.env.REACT_APP_API_BASE_URL;
 
@@ -18,8 +14,6 @@ function Dashboard() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-
 
   const refreshNotes = () => {
     setLoading(true);
