@@ -15,12 +15,12 @@ class JWTHandler {
             'data' => ['username' => $username]
         ];
 
-        return JWT::encode($token, self::$secret_key);
+        // Qui aggiungiamo il metodo di hashing come terzo parametro
+        return JWT::encode($token, self::$secret_key, 'HS256');
     }
 
     public static function validateToken($token) {
         try {
-            // Usare la classe Key come terzo parametro nella funzione decode
             $decoded = JWT::decode($token, new Key(self::$secret_key, 'HS256'));
             return (array) $decoded;
         } catch (Exception $e) {

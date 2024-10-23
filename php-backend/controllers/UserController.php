@@ -14,22 +14,21 @@ class UserController {
 
     public function login($username, $password) {
         if ($this->user->checkLogin($username, $password)) {
-            // Crea il payload del JWT
             $payload = [
-                "iss" => "http://yourapp.com",  // Issuer del token
-                "aud" => "http://yourapp.com",  // Audience del token
-                "iat" => time(),                // Timestamp di emissione
-                "exp" => time() + 3600,         // Scadenza (1 ora)
-                "data" => [                     // Dati dell'utente
+                "iss" => "https://simplynotes-static.onrender.com",  
+                "aud" => "https://simplynotes-static.onrender.com", 
+                "iat" => time(),               
+                "exp" => time() + 3600,         
+                "data" => [                     
                     "username" => $username
                 ]
             ];
 
-            // Crea il token JWT
-            $secret_key = 'your_secret_key';
+ 
+            $secret_key = 'asfidfj8rurff.dòà-sèdòvs0f2w.ascs13';  
             $jwt = JWT::encode($payload, $secret_key, 'HS256');
 
-            // Ritorna il token all'utente
+            
             return ['success' => true, 'token' => $jwt];
         } else {
             return ['success' => false, 'message' => 'Invalid credentials'];
@@ -43,7 +42,6 @@ class UserController {
             return ['success' => false, 'message' => 'User already exists'];
         }
     }
-    
 
     public function isAuthenticated() {
         $headers = apache_request_headers();
@@ -51,9 +49,9 @@ class UserController {
             $token = str_replace('Bearer ', '', $headers['Authorization']);
 
             try {
-                $secret_key = 'your_secret_key';
+                $secret_key = 'asfidfj8rurff.dòà-sèdòvs0f2w.ascs13'; 
                 $decoded = JWT::decode($token, new Key($secret_key, 'HS256'));
-                return (array) $decoded;  // Ritorna i dati decodificati
+                return (array) $decoded;  
             } catch (Exception $e) {
                 http_response_code(401);
                 echo json_encode(['success' => false, 'message' => 'Unauthorized']);
