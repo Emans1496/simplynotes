@@ -1,5 +1,6 @@
 <?php
 use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 
 class JWTHandler {
     private static $secret_key = 'asfidfj8rurff.dòà-sèdòvs0f2w.ascs13';
@@ -19,7 +20,8 @@ class JWTHandler {
 
     public static function validateToken($token) {
         try {
-            $decoded = JWT::decode($token, self::$secret_key, self::$encrypt);
+            // Usare la classe Key come terzo parametro nella funzione decode
+            $decoded = JWT::decode($token, new Key(self::$secret_key, 'HS256'));
             return (array) $decoded;
         } catch (Exception $e) {
             return false;

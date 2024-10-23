@@ -36,6 +36,15 @@ class UserController {
         }
     }
 
+    public function register($username, $password) {
+        if ($this->user->create($username, $password)) {
+            return ['success' => true, 'message' => 'User registered successfully'];
+        } else {
+            return ['success' => false, 'message' => 'User already exists'];
+        }
+    }
+    
+
     public function isAuthenticated() {
         $headers = apache_request_headers();
         if (isset($headers['Authorization'])) {
