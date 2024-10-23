@@ -1,5 +1,6 @@
 <?php
 // Carica i file necessari
+require_once __DIR__ . '/vendor/autoload.php';
 require_once 'routes/register.php';
 require_once 'routes/login.php';
 require_once 'routes/notes.php';
