@@ -2,7 +2,8 @@
 FROM php:8.0-fpm
 
 # Installa estensione PDO_pgsql
-RUN docker-php-ext-install pdo pdo_pgsql
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql
 
 # Copia i file del progetto nella cartella /var/www/html
 COPY . /var/www/html
