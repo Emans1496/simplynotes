@@ -16,19 +16,17 @@ class UserController {
         if ($this->user->checkLogin($username, $password)) {
             $payload = [
                 "iss" => "https://simplynotes-static.onrender.com",  
-                "aud" => "https://simplynotes-static.onrender.com", 
-                "iat" => time(),               
+                "aud" => "https://simplynotes-static.onrender.com",  
+                "iat" => time(),                
                 "exp" => time() + 3600,         
                 "data" => [                     
                     "username" => $username
                 ]
             ];
 
- 
-            $secret_key = 'asfidfj8rurff.dòà-sèdòvs0f2w.ascs13';  
+            $secret_key = 'asfidfj8rurff.dòà-sèdòvs0f2w.ascs13'; 
             $jwt = JWT::encode($payload, $secret_key, 'HS256');
 
-            
             return ['success' => true, 'token' => $jwt];
         } else {
             return ['success' => false, 'message' => 'Invalid credentials'];
@@ -64,4 +62,3 @@ class UserController {
         exit();
     }
 }
-?>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [user, setUser] = useState({ username: '', password: '' });
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -12,19 +13,35 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Creiamo un oggetto FormData
+    const formData = new FormData();
+    formData.append('username', user.username);
+    formData.append('password', user.password);
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/register.php`, user);
+      // Invio della richiesta con withCredentials per gestire i CORS
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/register.php`, formData, {
+        withCredentials: true
+      });
+
+      // Controllo della risposta e navigazione in caso di successo
       if (response.data.success) {
+        setMessage('Registrazione avvenuta con successo!');
         navigate('/login');
+      } else {
+        setMessage(response.data.message);
       }
     } catch (error) {
-      console.error('Error during registration', error);
+      console.error('Errore durante la registrazione', error);
+      setMessage('Si è verificato un errore durante la registrazione.');
     }
   };
 
   return (
     <div className="container">
       <h2>Register</h2>
+      {message && <div className="alert alert-danger">{message}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>
